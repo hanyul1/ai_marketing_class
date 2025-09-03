@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>펫스티치 - 반려동물 용품 구독, 매달 새로운 행복!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700;900&display=swap');
+        
+        :root {
+            --color-primary: #FF7B25; /* 주황 */
+            --color-secondary: #FFD233; /* 노랑 */
+            --color-tertiary: #33A1FF; /* 파랑 */
+            --color-background: #F8F9FA;
+            --color-text: #212529;
+            --color-dark-background: #1A1A1A;
+            --color-dark-text: #F8F9FA;
+            --font-family: 'Pretendard', sans-serif;
+            --max-width: 1200px;
+        }
+
+        /* 다크모드 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: #1A1A1A;
+                --color-text: #F8F9FA;
+                --color-card: #2c2c2c;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            background-color: #FF5A00;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+            color: white;
+            background: linear-gradient(135deg, var(--color-tertiary), var(--color-primary));
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .features h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 4rem;
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-card, white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card .icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card .icon img {
+            width: 40px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Product Section */
+        .product {
+            padding: 6rem 0;
+            background-color: var(--color-secondary);
+        }
+        
+        .product-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .product-image {
+            flex: 1 1 500px;
+            max-width: 500px;
+        }
+        
+        .product-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-text {
+            flex: 1 1 500px;
+        }
+        
+        .product-text h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 4rem;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--color-card, white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        /* CTA Banner */
+        .cta-banner {
+            background-color: var(--color-tertiary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .cta-banner h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-banner p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .cta-form input[type="email"] {
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            width: 300px;
+            font-size: 1rem;
+        }
+        
+        .cta-form .cta-button {
+            padding: 1rem 2.5rem;
+            margin-top: 0;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 0;
+        }
+        
+        .faq h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 1.5rem 0;
+            cursor: pointer;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+            padding-top: 0;
+        }
+        
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            padding-top: 1rem;
+        }
+        
+        .faq-item .plus-icon {
+            font-size: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.open .plus-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-text);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        footer .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        footer .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-form input[type="email"] {
+                width: 100%;
+            }
+            
+            .cta-form .cta-button {
+                width: 100%;
+            }
+            
+            .product-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .product-image {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">펫스티치</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <img src="https://images.unsplash.com/photo-1587300000000-000000000000?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzODg2NjF8MHwxfHNlYXJjaHw1fHxwZXQgc3Vic2NyaXB0aW9uJTIwYm94fGVufDB8fHx8MTY5MzY5MDgyNHww&ixlib=rb-4.0.3&q=80&w=1080"
+                 alt="강아지와 고양이 장난감과 간식으로 가득한 펫스티치 구독 박스" class="hero-bg-image">
+            <div class="hero-content">
+                <h1 aria-label="펫스티치, 반려동물 용품 구독 서비스">매달 새로운 행복을 선물하세요!</h1>
+                <p>펫스티치로 반려동물에게 꼭 맞는 장난감과 간식을 매달 받아보세요.</p>
+                <a href="#cta" class="cta-button" aria-label="첫 구독 40% 할인 혜택으로 지금 구독 신청하기">첫 구독 40% 할인, 지금 신청하기</a>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2>펫스티치만의 특별함</h2>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <div class="icon" aria-label="새로운 구성 아이콘">
+                            <img src="https://www.svgrepo.com/show/317500/gift-box.svg" alt="선물 상자 아이콘">
+                        </div>
+                        <h3>매달 바뀌는 즐거움</h3>
+                        <p>전문가가 엄선한 장난감과 간식으로 구성된 새로운 테마의 박스가 매달 집으로 배송됩니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon" aria-label="할인 혜택 아이콘">
+                            <img src="https://www.svgrepo.com/show/475141/discount-tag.svg" alt="할인 태그 아이콘">
+                        </div>
+                        <h3>놀라운 첫 구독 혜택</h3>
+                        <p>처음 펫스티치를 경험하는 분들을 위해 첫 달 구독료를 40% 할인해 드립니다.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon" aria-label="빠른 배송 아이콘">
+                            <img src="https://www.svgrepo.com/show/486221/delivery-box.svg" alt="택배 상자 아이콘">
+                        </div>
+                        <h3>언제나 무료 익일 배송</h3>
+                        <p>추가 배송비 걱정 없이, 주문 다음 날 바로 사랑스러운 선물을 받아보세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="product">
+            <div class="container">
+                <div class="product-content">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1599388651833-25a81e3a4e98?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzODg2NjF8MHwxfHNlYXJjaHwzfHxjYXQlMjBhbmQlMjBkb2clMjB0b3lzfGVufDB8fHx8MTY5MzY5MTY2OHww&ixlib=rb-4.0.3&q=80&w=1080"
+                             alt="강아지와 고양이용 장난감과 간식들" aria-label="강아지와 고양이 용품을 따로 선택할 수 있는 펫스티치">
+                    </div>
+                    <div class="product-text">
+                        <h2>강아지, 고양이 모두를 위한 맞춤형 선물</h2>
+                        <p>사랑하는 반려동물의 종류와 크기에 맞춰 가장 안전하고 즐거운 제품만 보내드립니다.</p>
+                        <p>구독 신청 시, 강아지 또는 고양이 전용 옵션을 선택할 수 있어 우리 아이에게 꼭 맞는 선물을 할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2>실제 고객 후기</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card" aria-label="고객 후기 1">
+                        <p>"매달 새로운 장난감과 간식이 와서 저희 강아지가 너무 좋아해요! 특히, 다양한 제품을 부담 없이 체험할 수 있어서 좋아요."</p>
+                        <div class="author">강아지 🐶 봄이 엄마</div>
+                    </div>
+                    <div class="testimonial-card" aria-label="고객 후기 2">
+                        <p>"저희 고양이가 까다로운 편인데, 펫스티치에서 오는 간식은 항상 잘 먹네요! 배송도 빠르고 정말 만족합니다."</p>
+                        <div class="author">고양이 🐱 치즈 집사</div>
+                    </div>
+                    <div class="testimonial-card" aria-label="고객 후기 3">
+                        <p>"첫 구독 할인이 정말 좋았어요. 저렴한 가격으로 좋은 제품을 받아서 친구들에게도 추천하고 있습니다. 앞으로도 계속 이용할 거예요!"</p>
+                        <div class="author">반려인 🧑‍🦱 김민수</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-banner" id="cta">
+            <div class="container">
+                <h2>매달 찾아오는 즐거움, 놓치지 마세요!</h2>
+                <p>지금 구독 신청하고 첫 달 40% 할인 혜택을 받아보세요.</p>
+                <div class="cta-form">
+                    <a href="#" class="cta-button" aria-label="첫 구독 40% 할인 혜택으로 지금 구독 신청하기">지금 구독 신청하기</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2>자주 묻는 질문</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>구독은 어떻게 신청하나요?</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>홈페이지의 '지금 신청하기' 버튼을 누른 후, 원하시는 구독 플랜(강아지/고양이)을 선택하고 배송 정보를 입력하시면 됩니다. 결제는 매달 자동 갱신됩니다.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>구독 해지는 언제든 가능한가요?</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>네, 언제든지 가능합니다. 다음 결제일 3일 전까지 마이페이지에서 직접 해지 신청하실 수 있습니다. 별도의 위약금은 없습니다.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>배송비는 얼마인가요?</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>펫스티치는 모든 구독자에게 무료 익일 배송 서비스를 제공합니다. 추가적인 배송비는 발생하지 않습니다.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>어떤 제품들이 들어있나요?</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>매달 새로운 테마에 맞춰 전문가가 엄선한 2~3가지의 장난감과 2~3가지의 고급 간식이 포함됩니다. 모든 제품은 반려동물에게 안전한 제품으로 구성됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">개인정보 처리방침</a>
+                <a href="#">이용 약관</a>
+                <a href="#">고객센터</a>
+            </div>
+            <p>&copy; 2025 펫스티치(petstich). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const answer = item.querySelector('.faq-answer');
+                const isOpen = item.classList.contains('open');
+
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('open');
+                });
+                
+                if (!isOpen) {
+                    item.classList.add('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
